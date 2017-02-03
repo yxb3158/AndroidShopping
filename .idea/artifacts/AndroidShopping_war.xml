@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="AndroidShopping:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="AndroidShopping.war">
+      <element id="artifact" artifact-name="AndroidShopping:war exploded" />
+    </root>
+  </artifact>
+</component>
