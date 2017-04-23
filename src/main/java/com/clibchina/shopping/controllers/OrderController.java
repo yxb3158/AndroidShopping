@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,6 +37,14 @@ public class OrderController extends PublicController {
     @ResponseBody
     public void getOrderDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+    }
+
+    @RequestMapping(value = "/acceptOrder", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView accpetOrder(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String orderId = request.getParameter("orderId");
+        orderService.updateShopOrderSign(Integer.parseInt(orderId), 1);
+        return new ModelAndView("redirect:/order");
     }
 
     @RequestMapping(value = "/hasNewOrder", method = RequestMethod.GET)

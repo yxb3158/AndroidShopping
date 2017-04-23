@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
     #parse("head.vm")
+    <script>
+        function showDetils(name, address, phone, totalPrice, ctime, detail) {
+            document.getElementById("dialog_name").innerHTML = name;
+            document.getElementById("dialog_address").innerHTML = address;
+            document.getElementById("dialog_phone").innerHTML = phone;
+            document.getElementById("dialog_total_price").innerHTML = totalPrice;
+            document.getElementById("dialog_ctime").innerHTML = ctime;
+            document.getElementById("dialog_detail").innerHTML = detail;
+        }
+
+        function jumpPage(url) {
+            location.href = url;
+        }
+    </script>
 
   <body>
 
@@ -37,9 +51,9 @@
                                   #set($ctime = $!{info.getCtime()} * 1000)
                                   <td><span class="label label-warning label-mini">$!date.format('yyyy-MM-dd HH:mm:ss ',$!ctime)</span></td>
                                   <td>
-                                      <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal"><i class="icon-file"></i> 查看详情</button>
-                                      <button class="btn btn-success btn-xs"><i class="icon-ok"></i> 接单</button>
-                                      <button class="btn btn-danger btn-xs"><i class="icon-trash "></i> 拒单</button>
+                                      <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" onclick="showDetils('${info.getName()}', '${info.getAddress()}', '${info.getPhone()}', '${info.getTotalPrice()}', '${ctime}', '暂无')"><i class="icon-file"></i> 查看详情</button>
+                                      <button class="btn btn-success btn-xs" onclick="jumpPage('/acceptOrder?orderId=${info.getId()}')"><i class="icon-ok"></i> 接单</button>
+##                                      <button class="btn btn-danger btn-xs"><i class="icon-trash "></i> 拒单</button>
                                   </td>
                               </tr>
                               #end
@@ -79,36 +93,28 @@
                               </thead>
                               <tbody>
                               <tr>
-                                  <td><a href="#">蛋糕类型:</a></td>
-                                  <td class="hidden-phone">慕斯蛋糕</td>
+                                  <td><a href="#">收货人:</a></td>
+                                  <td class="hidden-phone" id="dialog_name"></td>
                               </tr>
                               <tr>
-                                  <td><a href="#">蛋糕尺寸:</a></td>
-                                  <td class="hidden-phone">27寸</td>
+                                  <td><a href="#">收货地址:</a></td>
+                                  <td class="hidden-phone" id="dialog_address"></td>
                               </tr>
                               <tr>
-                                  <td><a href="#">蛋糕价格:</a></td>
-                                  <td class="hidden-phone">45.5元</td>
+                                  <td><a href="#">联系电话:</a></td>
+                                  <td class="hidden-phone" id="dialog_phone"></td>
                               </tr>
                               <tr>
-                                  <td><a href="#">用户留言:</a></td>
-                                  <td class="hidden-phone">我要一个很大很大的慕斯蛋糕</td>
+                                  <td><a href="#">订单总价:</a></td>
+                                  <td class="hidden-phone" id="dialog_total_price"></td>
                               </tr>
                               <tr>
-                                  <td><a href="#">是否自提:</a></td>
-                                  <td class="hidden-phone">否</td>
+                                  <td><a href="#">下单时间:</a></td>
+                                  <td class="hidden-phone" id="dialog_ctime"></td>
                               </tr>
                               <tr>
-                                  <td><a href="#">交货时间:</a></td>
-                                  <td class="hidden-phone">2017年02月07日</td>
-                              </tr>
-                              <tr>
-                                  <td><a href="#">配送地址:</a></td>
-                                  <td class="hidden-phone">北京市朝阳区望京东路4号。</td>
-                              </tr>
-                              <tr>
-                                  <td><a href="#">联系方式:</a></td>
-                                  <td class="hidden-phone">13312345678</td>
+                                  <td><a href="#">订单内容:</a></td>
+                                  <td class="hidden-phone" id="dialog_content"></td>
                               </tr>
                               </tbody>
                           </table>

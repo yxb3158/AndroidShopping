@@ -67,9 +67,7 @@ public class AndroidPayController extends PublicController {
         shopOrder.setSendTime(0);
         shopOrder.setCtime(TimeUtil.getNow());
         shopOrder.setUtime(TimeUtil.getNow());
-        int result = orderService.addShopOrder(shopOrder);
-        System.out.println(result);
-//        shopOrder.setId(id);
+        orderService.addShopOrder(shopOrder);
 
         for (ShopCart shopCart : shopCartList) {
             ShopOrderGoodsMapping shopOrderGoodsMapping = new ShopOrderGoodsMapping();
@@ -78,6 +76,42 @@ public class AndroidPayController extends PublicController {
             shopOrderGoodsMapping.setOrderId(shopOrder.getId());
             orderGoodsMappingService.addShopOrderGoodsMapping(shopOrderGoodsMapping);
         }
+
+        cartService.deleteShopCartByUserId(userId);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("status", "ok");
+        jsonObject.put("orderId", shopOrder.getId());
+        jsonObject.put("totalPrice", shopOrder.getTotalPrice());
+        writeAjax(response, jsonObject);
+        return;
+    }
+
+    @RequestMapping(value = "/payDiy", method = RequestMethod.GET)
+    @ResponseBody
+    public void payDiy(@RequestParam("userName") String userName,
+                    @RequestParam("userId") int userId,
+                    @RequestParam("msg") String msg,
+                    @RequestParam("receiver") String receiver,
+                    @RequestParam("phone") String phone,
+                    @RequestParam("address") String address,
+                    @RequestParam("result") String result,
+                    HttpServletResponse response) throws IOException {
+
+        ShopOrder shopOrder = new ShopOrder();
+        shopOrder.setUserId(userId);
+        shopOrder.setName(receiver);
+        shopOrder.setStatus(1);
+        shopOrder.setTotalPrice(200);
+        shopOrder.setAddress(address);
+        shopOrder.setNote(msg);
+        shopOrder.setPhone(phone);
+        shopOrder.setSendTime(0);
+        shopOrder.setCtime(TimeUtil.getNow());
+        shopOrder.setUtime(TimeUtil.getNow());
+        shopOrder.setIsDiy(1);
+        shopOrder.setMsg(result);
+        orderService.addShopOrder(shopOrder);
 
         cartService.deleteShopCartByUserId(userId);
 

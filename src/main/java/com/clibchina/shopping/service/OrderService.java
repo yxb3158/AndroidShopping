@@ -46,4 +46,8 @@ public class OrderService {
     public void updateShopOrder(ShopOrder shopOrder) {
         shopOrderDao.updateShopOrderStatusById(shopOrder.getId(), shopOrder.getStatus());
     }
+
+    public void updateShopOrderSign(int orderId, int sign) {
+        shopOrderDao.updateShopOrderSignById(orderId, sign);
+    }
 }

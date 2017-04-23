@@ -13,6 +13,33 @@ public class ShopOrder {
     private int sendTime;
     private int ctime;
     private int utime;
+    private int sign;
+    private int isDiy;
+    private String msg;
+
+    public int getSign() {
+        return sign;
+    }
+
+    public void setSign(int sign) {
+        this.sign = sign;
+    }
+
+    public int getIsDiy() {
+        return isDiy;
+    }
+
+    public void setIsDiy(int isDiy) {
+        this.isDiy = isDiy;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public int getId() {
         return id;

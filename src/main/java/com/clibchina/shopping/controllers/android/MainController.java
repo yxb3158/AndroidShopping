@@ -80,6 +80,29 @@ public class MainController {
         return new ModelAndView("android/typeList");
     }
 
+    @RequestMapping(value = "/diyTypeList")
+    @ResponseBody
+    public ModelAndView diyTypeListPage(Model model,
+                                     @RequestParam("type") int type,
+                                     @RequestParam("userName") String userName,
+                                     @RequestParam("userId") int userId) {
+        ShopType shopType = typeService.getShopType(type);
+        List<ShopType> shopTypeList = typeService.getAllShopType();
+        List<ShopBrand> brandList = brandService.getAllShopBrand();
+        List<ShopGoods> shopGoodsList = goodsService.getShopGoodsesByTypeId(type);
+        List<ShopGoodsDto> shopGoodsDtos = getShopGoodsDtos(shopGoodsList, shopTypeList, brandList);
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("shopType", shopType);
+        result.put("typeDomains", shopTypeList);
+        result.put("brandDomains", brandList);
+        result.put("goodsDomains", shopGoodsDtos);
+        result.put("userName", userName);
+        result.put("userId", userId);
+        model.addAllAttributes(result);
+        return new ModelAndView("android/diyTypeList");
+    }
+
     @RequestMapping(value = "/goodsDetail")
     @ResponseBody
     public ModelAndView goodsDetailPage(Model model,
@@ -260,6 +283,9 @@ public class MainController {
                 shopOrderDto.setTotalPrice(shopOrder.getTotalPrice());
                 shopOrderDto.setUserId(shopOrder.getUserId());
                 shopOrderDto.setUtime(shopOrder.getUtime());
+                shopOrderDto.setIsDiy(shopOrder.getIsDiy());
+                shopOrderDto.setSign(shopOrder.getSign());
+                shopOrderDto.setMsg(shopOrder.getMsg());
                 shopOrderDtos.add(shopOrderDto);
             }
         }

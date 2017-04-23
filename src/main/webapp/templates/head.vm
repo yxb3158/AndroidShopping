@@ -53,16 +53,20 @@
                             if ( $( "body" ).find( "audio" ).length <= 0 ) {
                                 $("body").append(strAudio);
                             }
-                            }
                             var audio = document.getElementById( "audioPlay" );
                             audio.play();
                             document.getElementById("newOrderCount").innerHTML="" + result.status;
-                        },
+                            document.getElementById("newOrderCount").style.display = "block";
+                        } else {
+                            console.log("none order");
+                            document.getElementById("newOrderCount").style.display = "none";
+                        }
+                    },
                     error: function(data) {
 
                     }
                 });
-            }, 5000)
+            }, 1000)
         }
     </script>
 </head>

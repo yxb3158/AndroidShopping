@@ -12,7 +12,7 @@
                 <a href="/order" class="">
                     <i class="icon-th"></i>
                     <span>ÊµÊ±¶©µ¥</span>
-                    <span class="label label-danger pull-right mail-info" id="newOrderCount">2</span>
+                    <span class="label label-danger pull-right mail-info" id="newOrderCount" style="display: none"></span>
                 </a>
             </li>
             <li class="sub-menu">

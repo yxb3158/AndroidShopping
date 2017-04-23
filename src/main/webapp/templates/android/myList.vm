@@ -54,14 +54,21 @@
         </ul>
         <div style="clear: both"></div>
     </div>
-        #foreach( ${goods} in ${info.getShopGoodsDtos()})
-        <div class="zfdd">
-            <ul>
-                <li class="li3"><a href="spxq.html"><img src="${goods.getPic()}" alt="" style="width: 60px;height: 60px"/></a></li>
-                <li class="li4"><span>б┴${goods.getNum()}</span><br/><span>${goods.getName()}</span><br/><span style="color: red">гд${goods.getPrice()}</span></li>
-            </ul>
-            <div style="clear: both"></div>
-        </div>
+        #if(${info.getIsDiy()} == 1)
+            <div style="font-size: 14px;margin-left: 20px;margin-top: 5px">
+                ${info.getMsg()}
+            </div>
+
+        #else
+            #foreach( ${goods} in ${info.getShopGoodsDtos()})
+                <div class="zfdd">
+                    <ul>
+                        <li class="li3"><a href="spxq.html"><img src="${goods.getPic()}" alt="" style="width: 60px;height: 60px"/></a></li>
+                        <li class="li4"><span>б┴${goods.getNum()}</span><br/><span>${goods.getName()}</span><br/><span style="color: red">гд${goods.getPrice()}</span></li>
+                    </ul>
+                    <div style="clear: both"></div>
+                </div>
+            #end
         #end
     <div class="ddfk">
             <ul>

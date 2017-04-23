@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class CUserService {
 
     @Autowired
-    ShopCUserDao shopCUserDao;
+    ShopUserDao shopCUserDao;
 
     public ShopUser queryShopUserByUserName(String userName) {
         ShopUser shopUser = shopCUserDao.queryShopUserByUserName(userName);

@@ -11,8 +11,8 @@ import java.util.List;
 @Component
 public interface ShopOrderDao {
 
-    final String INSERT_KEYS = "user_id, name, status, total_price, address, note, phone, send_time, ctime, utime";
-    final String INSERT_VALUES = "#{userId}, #{name}, #{status}, #{totalPrice}, #{address}, #{note}, #{phone}, #{sendTime}, #{ctime}, #{utime}";
+    final String INSERT_KEYS = "user_id, name, status, total_price, address, note, phone, send_time, ctime, utime, sign, is_diy, msg";
+    final String INSERT_VALUES = "#{userId}, #{name}, #{status}, #{totalPrice}, #{address}, #{note}, #{phone}, #{sendTime}, #{ctime}, #{utime}, #{sign}, #{isDiy}, #{msg}";
     final String SELECT_KEYS = "id, " + INSERT_KEYS;
 
     @Insert("INSERT INTO shop_order (" + INSERT_KEYS + ") VALUES " + "(" + INSERT_VALUES + ")")
@@ -28,11 +28,14 @@ public interface ShopOrderDao {
     @Select("select * from shop_order order by id desc")
     public List<ShopOrder> queryAllShopOrder();
 
-    @Select("select * from shop_order where status = #{status} order by id desc")
+    @Select("select * from shop_order where status = #{status} and sign = 0 order by id desc")
     public List<ShopOrder> queryShopOrderByStatus(@Param("status") int status);
 
     @Update("update shop_order set status = #{status} where id = #{id}")
     public void updateShopOrderStatusById(@Param("id") int id, @Param("status") int status);
+
+    @Update("update shop_order set sign = #{sign} where id = #{id}")
+    public void updateShopOrderSignById(@Param("id") int id, @Param("sign") int sign);
 
     @Delete("delete from shop_order where id = #{id}")
     public void deleteShopOrder(int id);
