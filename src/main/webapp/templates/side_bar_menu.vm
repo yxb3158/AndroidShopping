@@ -1,0 +1,73 @@
+<aside>
+    <div id="sidebar"  class="nav-collapse">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu">
+            <li class="active">
+                <a class="" href="/main">
+                    <i class="icon-dashboard"></i>
+                    <span>营业大盘</span>
+                </a>
+            </li>
+            <li class="sub-menu">
+                <a href="/order" class="">
+                    <i class="icon-th"></i>
+                    <span>实时订单</span>
+                    <span class="label label-danger pull-right mail-info" id="newOrderCount">2</span>
+                </a>
+            </li>
+            <li class="sub-menu">
+                <a href="/classManage" class="">
+                    <i class="icon-book"></i>
+                    <span>类别管理</span>
+                </a>
+            </li>
+            <li class="sub-menu">
+                <a href="/brandManage" class="">
+                    <i class="icon-cogs"></i>
+                    <span>品牌管理</span>
+                </a>
+            </li>
+            <li class="sub-menu">
+                <a href="/goodsManage" class="">
+                    <i class="icon-tasks"></i>
+                    <span>商品管理</span>
+                </a>
+            </li>
+            <li class="sub-menu">
+                <a href="/historyOrder" class="">
+                    <i class="icon-sitemap"></i>
+                    <span>订单管理</span>
+                </a>
+            </li>
+
+            <!--<li>-->
+                <!--<a class="" href="inbox.html">-->
+                    <!--<i class="icon-envelope"></i>-->
+                    <!--<span>Mail </span>-->
+                    <!--<span class="label label-danger pull-right mail-info">2</span>-->
+                <!--</a>-->
+            <!--</li>-->
+            <!--<li class="sub-menu">-->
+                <!--<a href="javascript:;" class="">-->
+                    <!--<i class="icon-glass"></i>-->
+                    <!--<span>Extra</span>-->
+                    <!--<span class="arrow"></span>-->
+                <!--</a>-->
+                <!--<ul class="sub">-->
+                    <!--<li><a class="" href="blank.html">Blank Page</a></li>-->
+                    <!--<li><a class="" href="profile.html">Profile</a></li>-->
+                    <!--<li><a class="" href="invoice.html">Invoice</a></li>-->
+                    <!--<li><a class="" href="404.html">404 Error</a></li>-->
+                    <!--<li><a class="" href="500.html">500 Error</a></li>-->
+                <!--</ul>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a class="" href="login.html">-->
+                    <!--<i class="icon-user"></i>-->
+                    <!--<span>Login Page</span>-->
+                <!--</a>-->
+            <!--</li>-->
+        </ul>
+        <!-- sidebar menu end-->
+    </div>
+</aside>

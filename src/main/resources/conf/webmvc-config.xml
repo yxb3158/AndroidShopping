@@ -7,46 +7,68 @@
 		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!--<context:component-scan base-package="com.clibchina"/>-->
+    <context:component-scan base-package="com.clibchina"/>
 
-    <!--<bean class="org.springframework.web.servlet.view.velocity.VelocityConfigurer" id="velocityConfigurer">-->
-        <!--<property name="resourceLoaderPath">-->
-            <!--<value>/templates/</value>-->
-        <!--</property>-->
+    <bean id="jdbcDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName">
+            <value>org.gjt.mm.mysql.Driver</value>
+        </property>
+        <property name="url">
+            <value>jdbc:mysql://45.118.252.5:3306/clibchina?useUnicode=true&amp;characterEncoding=UTF-8</value>
+        </property>
+        <property name="username">
+            <value>root</value>
+        </property>
+        <property name="password">
+            <value>clibchina</value>
+        </property>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.clibchina.shopping.dao" />
+    </bean>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="jdbcDataSource" />
+        <property name="configLocation" value="classpath:/conf/mybatis-config.xml"/>
+    </bean>
 
-        <!--<property name="velocityProperties">-->
-            <!--<props>-->
-                <!--<prop key="input.encoding">gbk</prop>-->
-                <!--<prop key="output.encoding">gbk</prop>-->
-                <!--<prop key="directive.foreach.counter.name">loopCounter</prop>-->
-                <!--<prop key="directive.foreach.counter.initial.value">0</prop>-->
-                <!--&lt;!&ndash;<prop key="velocimacro.library.autoreload">true</prop>&ndash;&gt;-->
-                <!--&lt;!&ndash;<prop key="velocimacro.library">macro.vm</prop>&ndash;&gt;-->
-            <!--</props>-->
-        <!--</property>-->
-    <!--</bean>-->
+    <bean class="org.springframework.web.servlet.view.velocity.VelocityConfigurer" id="velocityConfigurer">
+        <property name="resourceLoaderPath">
+            <value>/templates/</value>
+        </property>
 
-    <!--<bean class="org.springframework.web.servlet.view.velocity.VelocityViewResolver" id="viewResolver">-->
-        <!--<property name="suffix">-->
-            <!--<value>.vm</value>-->
-        <!--</property>-->
-        <!--<property name="contentType"><value>text/html;charset=UTF-8</value></property>-->
-        <!--<property name="prefix" value=""/>-->
-        <!--<property name="cache" value="false"/>-->
-        <!--<property name="toolboxConfigLocation" value="/WEB-INF/classes/tools.xml"></property>-->
-        <!--<property name="exposeSpringMacroHelpers" value="true"/>-->
-        <!--<property name="viewClass" value="com.clibchina.financial.tools.VelocityToolbox20View" />-->
-        <!--<property name="order" value="0"/>-->
-        <!--<property name="dateToolAttribute"><value>dateTool</value></property>-->
-        <!--<property name="numberToolAttribute"><value>numberTool</value></property>-->
-        <!--<property name="requestContextAttribute" value="rc"></property>-->
-    <!--</bean>-->
+        <property name="velocityProperties">
+            <props>
+                <prop key="input.encoding">gbk</prop>
+                <prop key="output.encoding">gbk</prop>
+                <prop key="directive.foreach.counter.name">loopCounter</prop>
+                <prop key="directive.foreach.counter.initial.value">0</prop>
+                <!--<prop key="velocimacro.library.autoreload">true</prop>-->
+                <!--<prop key="velocimacro.library">macro.vm</prop>-->
+            </props>
+        </property>
+    </bean>
 
-    <!--<bean class="org.springframework.web.servlet.view.velocity.VelocityViewResolver" id="viewResolverSession">-->
-        <!--<property name="suffix"> <value>.vm</value> </property>-->
-        <!--<property name="contentType"> <value>text/html;charset=utf-8</value> </property>-->
-        <!--<property name="exposeSessionAttributes"> <value>true</value> </property>-->
-    <!--</bean>-->
+    <bean class="org.springframework.web.servlet.view.velocity.VelocityViewResolver" id="viewResolver">
+        <property name="suffix">
+            <value>.vm</value>
+        </property>
+        <property name="contentType"><value>text/html;charset=UTF-8</value></property>
+        <property name="prefix" value=""/>
+        <property name="cache" value="false"/>
+        <property name="toolboxConfigLocation" value="/WEB-INF/classes/tools.xml"></property>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="viewClass" value="com.clibchina.shopping.tools.VelocityToolbox20View" />
+        <property name="order" value="0"/>
+        <property name="dateToolAttribute"><value>dateTool</value></property>
+        <property name="numberToolAttribute"><value>numberTool</value></property>
+        <property name="requestContextAttribute" value="rc"></property>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.velocity.VelocityViewResolver" id="viewResolverSession">
+        <property name="suffix"> <value>.vm</value> </property>
+        <property name="contentType"> <value>text/html;charset=utf-8</value> </property>
+        <property name="exposeSessionAttributes"> <value>true</value> </property>
+    </bean>
 
 
     <!--<bean id="log4jInitializer" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">-->
