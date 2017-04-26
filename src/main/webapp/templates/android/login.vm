@@ -8,26 +8,42 @@
 </head>
 <script src="js/jquery.js"></script>
 <script>
+
+    if (localStorage.userName && localStorage.password) {
+        location.href = "/android/main?userName=" + userName;
+    }
     function login() {
         var userName = document.getElementById("user_name").value;
         var password = document.getElementById("password").value;
-        var url = "/android/login?userName=" + userName + "&password=" + password;
-        $.ajax({
-            type: "post",
-            url: url,
-            dataType: "json",
-            success: function(data) {
-                var result = eval(data);
-                if (result.status == 'ok') {
-                    location.href = "/android/main?userName=" + userName;
-                } else {
-                    alert(result.msg);
+        if (!userName || !password) {
+            alert("用户名和密码不能为空");
+            return;
+        } else if (password.length != 8){
+            alert("密码必须为8位");
+            return;
+        } else {
+
+            var url = "/android/login?userName=" + userName + "&password=" + password;
+            $.ajax({
+                type: "post",
+                url: url,
+                dataType: "json",
+                success: function(data) {
+                    var result = eval(data);
+                    if (result.status == 'ok') {
+//                        localStorage.userName = userName;
+//                        localStorage.password = password;
+                        location.href = "/android/main?userName=" + userName;
+                    } else {
+                        alert(result.msg);
+                    }
+                },
+                error: function(data) {
+                    alert("出错了,请重试~");
                 }
-            },
-            error: function(data) {
-                alert("error");
-            }
-        });
+            });
+        }
+
     }
 </script>
 

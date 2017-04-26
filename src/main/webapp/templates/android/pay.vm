@@ -15,7 +15,21 @@
             var panel = document.getElementById("zfym");
             panel.style.display = "block";
         }
-
+        function ifAshowDialog() {
+            var msg = document.getElementById("msg").value;
+            var name = document.getElementById("name").value;
+            var phone = document.getElementById("phone").value;
+            var address = document.getElementById("address").value;
+            if(!name || !phone || !address) {
+                alert("请将收货信息填写完整~");
+                return;
+            } else if (phone.length != 11) {
+                alert("请输入正确手机号");
+                return;
+            } else {
+                ashowDialog();
+            }
+        }
         function pay() {
 
             var msg = document.getElementById("msg").value;
@@ -23,24 +37,26 @@
             var phone = document.getElementById("phone").value;
             var address = document.getElementById("address").value;
 
-            var url = "/android/pay?userId=${userId}&userName=${userName}" + "&msg=" + msg + "&receiver=" + name + "&phone=" + phone + "&address=" + address;
+                var url = "/android/pay?userId=${userId}&userName=${userName}" + "&msg=" + msg + "&receiver=" + name + "&phone=" + phone + "&address=" + address;
 
-            $.ajax({
-                type: "get",
-                url: url,
-                dataType: "json",
-                success: function(data) {
-                    var result = eval(data);
-                    console.log("接收到消息");
-                    console.log(result.totalPrice);
-                    if (result.status == "ok") {
-                        location.href = "/android/successful?userId=${userId}&userName=${userName}&totalPrice=" + result.totalPrice + "&orderId=" + result.orderId;
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    dataType: "json",
+                    success: function(data) {
+                        var result = eval(data);
+                        console.log("接收到消息");
+                        console.log(result.totalPrice);
+                        if (result.status == "ok") {
+                            location.href = "/android/successful?userId=${userId}&userName=${userName}&totalPrice=" + result.totalPrice + "&orderId=" + result.orderId;
+                        }
+                    },
+                    error: function(data) {
+                        alert("error");
                     }
-                },
-                error: function(data) {
-                    alert("error");
-                }
-            });
+                });
+
+
         }
     </script>
 </head>
@@ -111,7 +127,7 @@
                     <p><span style="color: #000000">合计：</span>￥${totalPrice}</p>
                 </div>
         </li>
-        <li class="li7" onclick="ashowDialog()"><button type="button">去支付</button></li>
+        <li class="li7" onclick="ifAshowDialog()"><button type="button">去支付</button></li>
     </ul>
 </div>
 <div class="theme-popover-mask" id="zhezhao"></div>

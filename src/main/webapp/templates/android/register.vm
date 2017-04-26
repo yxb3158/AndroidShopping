@@ -14,6 +14,19 @@
         var password = document.getElementById("password").value;
         var rePassword = document.getElementById("rePassword").value;
         var email = document.getElementById("email").value;
+        if (!userName || !password) {
+            alert("用户名和密码不能为空");
+            return;
+        } else if (password.length != 8){
+            alert("密码必须为8位");
+            return;
+        } else if ( !/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/.test(email)){
+            alert("邮箱格式不正确");
+            return;
+        } else if (password != rePassword) {
+            alert("两次密码不一致");
+            return;
+        }
         var url = "/android/register?userName=" + userName + "&password=" + password + "&rePassword=" + rePassword + "&email=" + email;
         $.ajax({
             type: "post",
@@ -28,7 +41,7 @@
                 }
             },
             error: function(data) {
-                alert("error");
+                alert("出错了,请重试");
             }
         });
     }

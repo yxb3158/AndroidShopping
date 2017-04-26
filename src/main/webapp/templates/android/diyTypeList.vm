@@ -28,7 +28,21 @@
                 addClass(pointer, "check_in")
             }
         }
-
+        function ifAshowDialog() {
+            var msg = document.getElementById("msg").value;
+            var name = document.getElementById("name").value;
+            var phone = document.getElementById("phone").value;
+            var address = document.getElementById("address").value;
+            if(!name || !phone || !address) {
+                alert("请将收货信息填写完整~");
+                return;
+            } else if (phone.length != 11) {
+                alert("请输入正确手机号");
+                return;
+            } else {
+                ashowDialog();
+            }
+        }
         function addClass( elements,cName ){
             if( !hasClass( elements,cName ) ){
                 elements.className += " " + cName;
@@ -92,7 +106,7 @@
     <div class="tour">
         <a href="/android/main?userName=${userName}" class="tour1"><img src="img/back.png" alt="" style="height: 26px;width: 20px"></a>
         <p>${shopType.getTypeName()}<i class="xlmenu"></i></p>
-        <a href="myList.html" class="tour2"><img src="img/u65.png" alt="" style="width: 35px;height: 35px"></a>
+        <a href="javascript:;" class="tour2"><img src="img/u65.png" alt="" style="width: 35px;height: 35px"></a>
     </div>
     #set($hei=${typeDomains.size()} * 2 + 2)
     <div class="ycmenu" style="height: ${hei}rem">
@@ -149,7 +163,7 @@
                     <p><span style="color: #000000">合计：</span>￥200</p>
                 </div>
             </li>
-            <li class="li7" onclick="ashowDialog()"><button type="button">去支付</button></li>
+            <li class="li7" onclick="ifAshowDialog()"><button type="button">去支付</button></li>
         </ul>
     </div>
     <div class="theme-popover-mask" id="zhezhao"></div>

@@ -46,7 +46,7 @@
     <div class="tour">
         <a href="/android/main?userName=${userName}" class="tour1"><img src="img/back.png" alt="" style="height: 26px;width: 20px"></a>
         <p>${shopType.getTypeName()}<i class="xlmenu"></i></p>
-        <a href="myList.html" class="tour2"><img src="img/u65.png" alt="" style="width: 35px;height: 35px"></a>
+        <a href="javascript:;" class="tour2"><img src="img/u65.png" alt="" style="width: 35px;height: 35px"></a>
     </div>
     #set($hei=${typeDomains.size()} * 2 + 2)
     <div class="ycmenu" style="height: ${hei}rem">
@@ -60,7 +60,7 @@
     <div class="allsp">
         #foreach( ${info} in ${goodsDomains})
             <figure>
-                <a href="spxq.html"><img src="${info.getPic()}" alt="商品" class="xqtp"/></a>
+                <a href="javascript:;"><img src="${info.getPic()}" alt="商品" class="xqtp"/></a>
                 <p>${info.getName()}</p>
                 <div class="info">
                     <em class="sat">￥${info.getPrice()}&nbsp;<small style="text-decoration: line-through; color: grey;">￥${info.getOriginPrice()}</small></em>

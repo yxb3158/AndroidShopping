@@ -38,3 +38,13 @@ a,img,button,input,textarea{
 .actGotop img{
     width: 40px;
 }
+.alert {
+    display: none;
+    z-index: 111;
+    position: fixed;
+    top: 50%;
+    background-color: #ffffff;
+    margin-left: 20%;
+    margin-right: 20%;
+    width: 60%;
+}

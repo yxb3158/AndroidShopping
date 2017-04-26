@@ -7,7 +7,7 @@
             document.getElementById("dialog_address").innerHTML = address;
             document.getElementById("dialog_phone").innerHTML = phone;
             document.getElementById("dialog_total_price").innerHTML = totalPrice;
-            document.getElementById("dialog_ctime").innerHTML = ctime;
+            document.getElementById("dialog_ctime").innerHTML = new Date(parseInt(ctime) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
             document.getElementById("dialog_detail").innerHTML = detail;
         }
 
@@ -114,7 +114,7 @@
                               </tr>
                               <tr>
                                   <td><a href="#">订单内容:</a></td>
-                                  <td class="hidden-phone" id="dialog_content"></td>
+                                  <td class="hidden-phone" id="dialog_detail"></td>
                               </tr>
                               </tbody>
                           </table>

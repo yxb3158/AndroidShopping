@@ -17,7 +17,6 @@ a {
     -webkit-user-select: none;
 }
 .body{
-    font-family:"Tahoma,Arial,Roboto,”Droid Sans”,”Helvetica Neue”,”Droid Sans Fallback”,”Heiti SC”,”Hiragino Sans GB”,Simsun,sans-self;
 	margin: 0 auto;
 }
 img{
@@ -76,11 +75,10 @@ a,img,button,input,textarea {
 .ddbh{
     width: 100%;
     height: 3rem;
-    border-bottom: 1px solid #dcdcdc;
-}
-.ddbh{
     font-size: 1.3rem;
     line-height: 3rem;
+    border-top: 1px solid green;
+    border-bottom: 1px solid green;
 }
 .ddbh .li1{
     float: left;
@@ -196,14 +194,10 @@ a,img,button,input,textarea {
     display:block;
     margin:5px auto 2px auto;
 }
-.wx_nav a:active{
-    background-color:whitesmoke;
+.wx_nav a.nav_me{
     color:lightseagreen;
 }
-.wx_nav a:active,.wx_nav a.nav_shopcart{
-    color:lightseagreen;
-}
-.wx_nav a:active:before,.wx_nav a.nav_shopcart:before{
+.wx_nav a:active:before,.wx_nav a.nav_me:before{
     background-image:url("../img/greenicon.png");
     background-repeat:no-repeat;
     background-size:340px 20px;
