@@ -7,7 +7,7 @@
             document.getElementById("dialog_address").innerHTML = address;
             document.getElementById("dialog_phone").innerHTML = phone;
             document.getElementById("dialog_total_price").innerHTML = totalPrice;
-            document.getElementById("dialog_ctime").innerHTML = new Date(parseInt(ctime) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+            document.getElementById("dialog_ctime").innerHTML = new Date(parseInt(ctime) ).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
             document.getElementById("dialog_detail").innerHTML = detail;
         }
 
@@ -124,9 +124,6 @@
               <div class="modal-footer">
                   <button type="button" class="btn btn-default"
                           data-dismiss="modal">关 闭
-                  </button>
-                  <button type="button" class="btn btn-primary">
-                      接 单
                   </button>
               </div>
           </div><!-- /.modal-content -->

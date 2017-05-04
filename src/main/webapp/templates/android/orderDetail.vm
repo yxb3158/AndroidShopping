@@ -12,7 +12,6 @@
 <body>
 <div class="body">
     <div class="tour">
-        <a href="allGoods.html" class="tour1"><img src="img/back.png" alt="" style="height: 26px;width: 20px"></a>
         <p>商品订单</p>
     </div>
     <div class="ewm">

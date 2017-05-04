@@ -12,7 +12,6 @@
 <body>
 <div class="body">
     <div class="tour">
-        <a href="myList.html" class="tour1"><img src="img/back.png" alt="" style="height: 26px;width: 20px"></a>
         <p>支付成功</p>
     </div>
     <div class="header3">
@@ -37,16 +36,9 @@
     <div class="ckdd">
         <div style="width:11rem;margin:0 auto"><a href="/android/myList?userId=${userId}&userName=${userName}&type=1"><button type="button">查看订单</button></a></div>
     </div>
-    <div class="wxts">
-        <div class="neirong">
-            <p style="color: #ff0000">!温馨提示</p>
-            <p>1. 商家发货后7天，平台会自动确认收货，若7天后未收到您购买的商品，请及时联系宅生活平台客服。</p>
-            <p>2. 由于网络延迟会出现订单已支付成功，但返回查看订单为“待支付”状态，此种情况无需再次支付，请您耐心等待几分钟，平台会自动更新数据到“已支付“状态。</p>
-        </div>
-    </div>
     <div class="kefu">
-        <p>如有其他问题请拨打客服电话</p>
-        <p style="color: green">400-1234-1234</p>
+        <p>如有其他问题请拨打管理员电话</p>
+        <p style="color: green">155-4511-1235</p>
         <div class="wx_nav" id="wx_nav">
             <a href="/android/main?userName=${userName}" class="nav_index" id="nav_index">首页</a>
             <a href="/android/shopping?userId=${userId}&userName=${userName}" class="nav_shopcart" id="nav_shopcart">购物车</a>

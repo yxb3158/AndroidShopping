@@ -77,7 +77,7 @@
 <div class="container" style="background: white">
     <div class="allLogo" style="background: white">
         <div class="logo" style="clear: left">
-            <div class="head_bar" style="background: #e74c3c; color: white; line-height: 60px; text-align: center; font-size: 14px" onclick="jumpPage('typeList?type=1&userName=${userName}&userId=${userId}')">奶油蛋糕</div>
+            <div class="head_bar" style="background: #e74c3c; color: white; line-height: 60px; text-align: center; font-size: 14px" onclick="jumpPage('typeList?type=3&userName=${userName}&userId=${userId}')">减肥蛋糕</div>
             <div class="head_bar" style="background: #2ecc71; color: white; line-height: 60px; text-align: center; font-size: 14px" onclick="jumpPage('typeList?type=2&userName=${userName}&userId=${userId}')">水果蛋糕</div>
             <div class="head_bar" style="background: #3498db; color: white; line-height: 60px; text-align: center; font-size: 14px" onclick="jumpPage('typeList?type=3&userName=${userName}&userId=${userId}')">鲜花蛋糕</div>
             <div class="head_bar" style="background: #e67e22; color: white; line-height: 60px; text-align: center; font-size: 14px" onclick="jumpPage('typeList?type=4&userName=${userName}&userId=${userId}')">慕斯蛋糕</div>
@@ -128,14 +128,18 @@
     </div>
     <div class="allsp">
         #foreach( ${info} in ${goodsDomains})
-        <figure class="goods">
-            <a href="javascript:;"><img src="${info.getPic()}" alt="商品" class="xqtp"/></a>
-            <p>${info.getName()}</p>
-            <div class="info">
-                <em class="sat">￥${info.getPrice()}&nbsp;<small>￥${info.getOriginPrice()}</small></em>
-                <a href="#" onclick="addCart(${info.getId()})"><img src="img/u20.png" alt="购物车" style="width: 30px;height: 30px" align="right"/></a>
-            </div>
-        </figure>
+            #if(${info.getSign()} == 1)
+                <figure class="goods">
+                    <a href="javascript:;"><img src="${info.getPic()}" alt="商品" class="xqtp"/></a>
+                    <p>${info.getName()}</p>
+                    <p>${info.getDescription()}</p>
+                    <input type="hidden" value="${info.getStock()}" class="stockLeft">
+                    <div class="info">
+                        <em class="sat">￥${info.getPrice()}&nbsp;<small>￥${info.getOriginPrice()}</small></em>
+                        <a href="#" onclick="addCart(${info.getId()}, this)"><img src="img/u20.png" alt="购物车" style="width: 30px;height: 30px" align="right"/></a>
+                    </div>
+                </figure>
+            #end
         #end
         <div class="clear"></div>
     </div>
@@ -236,7 +240,12 @@
         });
     }
 
-    function addCart(goodsId) {
+    function addCart(goodsId, that) {
+        var stock = $(that).parents('.goods').find('.stockLeft').val();
+        if(stock == 0) {
+            alert("该商品管理员已设库存为0,不能购买");
+            return;
+        }
         $.ajax({
             type: "get",
             url: "addCart?userId=${userId}&goodsId=" + goodsId + "&userName=${userName}",

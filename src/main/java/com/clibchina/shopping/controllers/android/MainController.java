@@ -40,11 +40,11 @@ public class MainController {
     @RequestMapping(value = "/main")
     @ResponseBody
     public ModelAndView mainPage(Model model, @RequestParam("userName") String userName) {
-        ShopUser shopUser = cUserService.queryShopUserByUserName(userName);
-        List<ShopType> shopTypeList = typeService.getAllShopType();
-        List<ShopBrand> brandList = brandService.getAllShopBrand();
-        List<ShopGoods> goodsList = goodsService.getAllShopGoods();
-        List<ShopGoodsDto> shopGoodsDtos = getShopGoodsDtos(goodsList, shopTypeList, brandList);
+        ShopUser shopUser = cUserService.queryShopUserByUserName(userName); // 定义一个shopUser对象,包括根据用户查询出来的用户信息;
+        List<ShopType> shopTypeList = typeService.getAllShopType();  // 定义一个list,包含查询出来的所有商品类型
+        List<ShopBrand> brandList = brandService.getAllShopBrand();  // 定义一个list,包含查询出来的所有商品品牌
+        List<ShopGoods> goodsList = goodsService.getAllShopGoods();  // 定义一个list,包含查询出来的所有商品
+        List<ShopGoodsDto> shopGoodsDtos = getShopGoodsDtos(goodsList, shopTypeList, brandList); //调用私有方法,将查处所有信息封装到一个list
 
         Map<String, Object> result = new HashMap<>();
         result.put("typeDomains", shopTypeList);
@@ -67,7 +67,7 @@ public class MainController {
         List<ShopType> shopTypeList = typeService.getAllShopType();
         List<ShopBrand> brandList = brandService.getAllShopBrand();
         List<ShopGoods> shopGoodsList = goodsService.getShopGoodsesByTypeId(type);
-        List<ShopGoodsDto> shopGoodsDtos = getShopGoodsDtos(shopGoodsList, shopTypeList, brandList);
+    List<ShopGoodsDto> shopGoodsDtos = getShopGoodsDtos(shopGoodsList, shopTypeList, brandList);
 
         Map<String, Object> result = new HashMap<>();
         result.put("shopType", shopType);

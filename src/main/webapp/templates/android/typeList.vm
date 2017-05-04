@@ -26,7 +26,13 @@
 
         });
 
-        function addCart(goodsId) {
+        function addCart(goodsId, that) {
+            var stock = $(that).parents('.info').find('.stockLeft').val();
+            console.log(stock)
+            if(stock == 0) {
+                alert("该商品管理员已设库存为0,不能购买");
+                return;
+            }
             $.ajax({
                 type: "get",
                 url: "addCart?userId=${userId}&goodsId=" + goodsId + "&userName=${userName}",
@@ -51,7 +57,7 @@
     #set($hei=${typeDomains.size()} * 2 + 2)
     <div class="ycmenu" style="height: ${hei}rem">
         <ul>
-            <li><a href="allGoods.html" class="a">全部商品</a></li>
+            <li><a href="javascript:;" class="a">全部商品</a></li>
             #foreach( ${info} in ${typeDomains})
                 <li><a href="/android/typeList?type=${info.getId()}&userName=${userName}&userId=${userId}">${info.getTypeName()}</a></li>
             #end
@@ -64,7 +70,8 @@
                 <p>${info.getName()}</p>
                 <div class="info">
                     <em class="sat">￥${info.getPrice()}&nbsp;<small style="text-decoration: line-through; color: grey;">￥${info.getOriginPrice()}</small></em>
-                    <a href="#" onclick="addCart(${info.getId()})"><img src="img/u20.png" alt="购物车" style="width: 30px;height: 30px" align="right"/></a>
+                    <input type="hidden" value="${info.getStock()}" class="stockLeft">
+                    <a href="#" onclick="addCart(${info.getId()}, this)"><img src="img/u20.png" alt="购物车" style="width: 30px;height: 30px" align="right"/></a>
                 </div>
             </figure>
         #end
