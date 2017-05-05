@@ -217,14 +217,14 @@ public class MainController {
         return new ModelAndView("android/backPassword");
     }
 
-    @RequestMapping(value = "/myList")
+    @RequestMapping(value = "/myList") //订单
     @ResponseBody
     public ModelAndView myListPage(Model model,
                                    @RequestParam("userName") String userName,
                                    @RequestParam("userId") int userId,
                                    @RequestParam("type") int type) {
 
-        List<ShopOrder> shopOrders = orderService.getShopOrderByUserId(userId);
+        List<ShopOrder> shopOrders = orderService.getShopOrderByUserId(userId);  //这里的ShopOrder是domain里封装的数据库订单类
         if (shopOrders.isEmpty()) {
             Map<String, Object> result = new HashMap<>();
             result.put("userName", userName);
@@ -246,14 +246,14 @@ public class MainController {
             brandMap.put(shopBrand.getId(), shopBrand.getName());
         }
 
-        List<ShopOrderDto> shopOrderDtos = new ArrayList<>();
-        for (ShopOrder shopOrder : shopOrders) {
-            if (type == -1 || type == shopOrder.getStatus()) {
+        List<ShopOrderDto> shopOrderDtos = new ArrayList<>(); //存放所有订单
+        for (ShopOrder shopOrder : shopOrders) { // 循环每个订单
+            if (type == -1 || type == shopOrder.getStatus()) {   //type是传值订单类型  -1全部订单
                 ShopOrderDto shopOrderDto = new ShopOrderDto();
                 List<ShopOrderGoodsMapping> shopOrderGoodsMappings  = orderGoodsMappingService.getShopOrderGoodsMappingByOrderId(shopOrder.getId());
-                List<ShopGoodsDto> shopGoodsDtos = new ArrayList<>();
-                for (ShopOrderGoodsMapping shopOrderGoodsMapping : shopOrderGoodsMappings) {
-                    ShopGoods shopGoods = goodsService.getShopGoods(shopOrderGoodsMapping.getGoodsId());
+                List<ShopGoodsDto> shopGoodsDtos = new ArrayList<>(); // 定义一个数组,存放对应订单下商品
+                for (ShopOrderGoodsMapping shopOrderGoodsMapping : shopOrderGoodsMappings) { // 循环每个订单下商品
+                    ShopGoods shopGoods = goodsService.getShopGoods(shopOrderGoodsMapping.getGoodsId());// 通过商品id拿到具体商品信息
                     ShopGoodsDto shopGoodsDto = new ShopGoodsDto();
                     shopGoodsDto.setId(shopGoods.getId());
                     shopGoodsDto.setBrand(shopGoods.getBrand());
@@ -299,43 +299,43 @@ public class MainController {
         return new ModelAndView("android/myList");
     }
 
-    @RequestMapping(value = "/orderDetail")
-    @ResponseBody
-    public ModelAndView orderDetailPage(Model model,
-                                        @RequestParam("orderId") int orderId,
-                                        @RequestParam("userName") String userName,
-                                        @RequestParam("userId") int userId) {
-        Map<String, Object> result = new HashMap<>();
-        result.put("userName", userName);
-        result.put("userId", userId);
-        model.addAllAttributes(result);
-        return new ModelAndView("android/orderDetail");
-    }
-
-    @RequestMapping(value = "/group")
-    @ResponseBody
-    public ModelAndView groupPage(Model model,
-                                  @RequestParam("userId") int userId,
-                                  @RequestParam("userName") String userName) {
-        Map<String, Object> result = new HashMap<>();
-        result.put("userName", userName);
-        result.put("userId", userId);
-        model.addAllAttributes(result);
-        return new ModelAndView("android/group");
-    }
-
-    @RequestMapping(value = "/groupDetail")
-    @ResponseBody
-    public ModelAndView groupDetailPage(Model model,
-                                        @RequestParam("goodsId") int goodsId,
-                                        @RequestParam("userId") int userId,
-                                        @RequestParam("userName") String userName) {
-        Map<String, Object> result = new HashMap<>();
-        result.put("userName", userName);
-        result.put("userId", userId);
-        model.addAllAttributes(result);
-        return new ModelAndView("android/groupDetail");
-    }
+//    @RequestMapping(value = "/orderDetail")
+//    @ResponseBody
+//    public ModelAndView orderDetailPage(Model model,
+//                                        @RequestParam("orderId") int orderId,
+//                                        @RequestParam("userName") String userName,
+//                                        @RequestParam("userId") int userId) {
+//        Map<String, Object> result = new HashMap<>();
+//        result.put("userName", userName);
+//        result.put("userId", userId);
+//        model.addAllAttributes(result);
+//        return new ModelAndView("android/orderDetail");
+//    }
+//
+//    @RequestMapping(value = "/group")
+//    @ResponseBody
+//    public ModelAndView groupPage(Model model,
+//                                  @RequestParam("userId") int userId,
+//                                  @RequestParam("userName") String userName) {
+//        Map<String, Object> result = new HashMap<>();
+//        result.put("userName", userName);
+//        result.put("userId", userId);
+//        model.addAllAttributes(result);
+//        return new ModelAndView("android/group");
+//    }
+//
+//    @RequestMapping(value = "/groupDetail")
+//    @ResponseBody
+//    public ModelAndView groupDetailPage(Model model,
+//                                        @RequestParam("goodsId") int goodsId,
+//                                        @RequestParam("userId") int userId,
+//                                        @RequestParam("userName") String userName) {
+//        Map<String, Object> result = new HashMap<>();
+//        result.put("userName", userName);
+//        result.put("userId", userId);
+//        model.addAllAttributes(result);
+//        return new ModelAndView("android/groupDetail");
+//    }
 
     private List<ShopGoodsDto> getShopGoodsDtos(List<ShopGoods> goodsList, List<ShopType> shopTypeList, List<ShopBrand> brandList) {
 
