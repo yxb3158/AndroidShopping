@@ -6,7 +6,7 @@
         function login() {
             var userName = document.getElementById("user_name").value;
             var password = document.getElementById("password").value;
-            var url = "/android/login?userName=" + userName + "&password=" + password;
+            var url = "/login?userName=" + userName + "&password=" + password;
             $.ajax({
                 type: "post",
                 url: url,
@@ -14,7 +14,7 @@
                 success: function(data) {
                     var result = eval(data);
                     if (result.status == 'ok') {
-                        location.href = "/android/main";
+                        location.href = "/main";
                     } else {
                         alert(result.msg);
                     }
@@ -29,17 +29,17 @@
     <div class="container">
 
       <form class="form-signin">
-        <h2 class="form-signin-heading">¿ì½ÝµÇÂ¼</h2>
+        <h2 class="form-signin-heading">ç™»å½•</h2>
         <div class="login-wrap">
-            <input type="text" class="form-control" placeholder="ÕÊºÅ" id="user_name" autofocus>
-            <input type="password" class="form-control" placeholder="ÃÜÂë" id="password">
+            <input type="text" class="form-control" placeholder="ç”¨æˆ·å" id="user_name" autofocus>
+            <input type="password" class="form-control" placeholder="å¯†ç " id="password">
             <label class="checkbox">
-##                <input type="checkbox" value="remember-me"> ¼Ç×¡ÃÜÂë
-                <span class="pull-right"> <a href="/changePasswordPage"> Íü¼ÇÃÜÂë?</a></span>
+##                <input type="checkbox" value="remember-me"> ï¿½ï¿½×¡ï¿½ï¿½ï¿½ï¿½
+                <span class="pull-right"> <a href="/changePasswordPage"> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?</a></span>
             </label>
-            <div class="btn btn-lg btn-login btn-block" onclick="login()" >µÇ Â¼</div>
+            <div class="btn btn-lg btn-login btn-block" onclick="login()" >ç™»å½•</div>
             <label class="checkbox">
-                <span class="pull-right"> <a href="/registerPage"> ×¢²áÕÊ»§</a></span>
+                <span class="pull-right"> <a href="/registerPage"> ×¢ï¿½ï¿½ï¿½Ê»ï¿½</a></span>
             </label>
         </div>
       </form>

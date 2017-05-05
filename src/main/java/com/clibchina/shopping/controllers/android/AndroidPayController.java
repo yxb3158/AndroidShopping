@@ -113,7 +113,6 @@ public class AndroidPayController extends PublicController {
         shopOrder.setMsg(result);
         orderService.addShopOrder(shopOrder);
 
-        cartService.deleteShopCartByUserId(userId);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("status", "ok");
