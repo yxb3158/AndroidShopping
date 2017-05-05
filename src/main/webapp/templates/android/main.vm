@@ -78,7 +78,12 @@
     <div class="allLogo" style="background: white">
         <div class="logo" style="clear: left">
             #foreach( ${info} in ${typeDomains})
-                <div class="head_bar" style="border: 0.02rem solid #fff;background: -webkit-linear-gradient(top, lightseagreen, #317eb2); color: white; line-height: 60px; text-align: center; font-size: 14px" onclick="jumpPage('typeList?type=${info.getId()}&userName=${userName}&userId=${userId}')">${info.getTypeName()}</div>
+                <div class="head_bar" style="border: 1px solid #4baab2;background: -webkit-linear-gradient(top, lightseagreen, #317eb2); color: white; line-height: 60px; text-align: center; font-size: 14px" )
+                     #if(${info.getId()} == 8) onclick="jumpPage('diyTypeList?type=${info.getId()}&userName=${userName}&userId=${userId}')"
+                     #else
+                     onclick="jumpPage('typeList?type=${info.getId()}&userName=${userName}&userId=${userId}')"
+                     #end
+                     >${info.getTypeName()}</div>
             #end
             <div class="clear_float"></div>
         </div>

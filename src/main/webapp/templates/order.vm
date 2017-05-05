@@ -51,7 +51,7 @@
                                   #set($ctime = $!{info.getCtime()} * 1000)
                                   <td><span class="label label-warning label-mini">$!date.format('yyyy-MM-dd HH:mm:ss ',$!ctime)</span></td>
                                   <td>
-                                      <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" onclick="showDetils('${info.getName()}', '${info.getAddress()}', '${info.getPhone()}', '${info.getTotalPrice()}', '${ctime}', '暂无')"><i class="icon-file"></i> 查看详情</button>
+                                      <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" onclick="showDetils('${info.getName()}', '${info.getAddress()}', '${info.getPhone()}', '${info.getTotalPrice()}', '${ctime}', '${info.getNote()}')"><i class="icon-file"></i> 查看详情</button>
                                       <button class="btn btn-success btn-xs" onclick="jumpPage('/acceptOrder?orderId=${info.getId()}')"><i class="icon-ok"></i> 接单</button>
 ##                                      <button class="btn btn-danger btn-xs"><i class="icon-trash "></i> 拒单</button>
                                   </td>
@@ -113,7 +113,7 @@
                                   <td class="hidden-phone" id="dialog_ctime"></td>
                               </tr>
                               <tr>
-                                  <td><a href="#">订单内容:</a></td>
+                                  <td><a href="#">用户留言:</a></td>
                                   <td class="hidden-phone" id="dialog_detail"></td>
                               </tr>
                               </tbody>
