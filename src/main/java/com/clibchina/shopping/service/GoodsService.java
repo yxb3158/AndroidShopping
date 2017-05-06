@@ -20,6 +20,11 @@ public class GoodsService {
         return shopGoodses;
     }
 
+    public List<ShopGoods> getAllShopGoodsBysearch(String searchMsg) {
+        List<ShopGoods> shopGoodses = shopGoodsDao.queryAllShopGoodsBysearchMsg(searchMsg);
+        return shopGoodses;
+    }
+
     public List<ShopGoods> getShopGoodsesByTypeId(int typeId) {
         List<ShopGoods> shopGoodses = shopGoodsDao.queryShopGoodsesByTypeId(typeId);
         return shopGoodses;

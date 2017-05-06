@@ -24,6 +24,9 @@ public interface ShopGoodsDao {
     @Select("select * from shop_goods")
     public List<ShopGoods> queryAllShopGoods();
 
+    @Select("select * from shop_goods where name = #{searchMsg}")
+    public List<ShopGoods> queryAllShopGoodsBysearchMsg(String searchMsg);
+
     @Select("select * from shop_goods where type = #{typeId}")
     public List<ShopGoods> queryShopGoodsesByTypeId(int typeId);
 

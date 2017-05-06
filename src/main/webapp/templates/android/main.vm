@@ -124,7 +124,11 @@
             <ul>
                 <li><a href="allGoods.html" class="a">全部商品</a></li>
                 #foreach( ${info} in ${typeDomains})
-                    <li><a href="/android/typeList?type=${info.getId()}&userName=${userName}&userId=${userId}">${info.getTypeName()}</a></li>
+                    #if(${info.getId()} == 8)
+                        <li><a href="/android/diyTypeList?type=${info.getId()}&userName=${userName}&userId=${userId}">${info.getTypeName()}</a></li>
+                    #else
+                        <li><a href="/android/typeList?type=${info.getId()}&userName=${userName}&userId=${userId}">${info.getTypeName()}</a></li>
+                    #end
                 #end
             </ul>
         </div>
@@ -267,15 +271,32 @@
     }
     function search() {
         var msg = document.getElementById("searchBar").value;
-        var goodses = document.getElementsByClassName("goods");
-        for (var i = 0 ; i < goodses.length ; i ++) {
-            goodses[i].style.display = "block";
-            if (goodses[i].innerHTML.indexOf(msg) > -1) {
-                goodses[i].style.display = "block";
-            } else {
-                goodses[i].style.display = "none";
-            }
+        if(msg) {
+            location.href = "search?userId=${userId}&userName=${userName}&searchMsg="+msg;
+        } else {
+            location.href = "main?userName=${userName}";
         }
+##        alert(11);
+##        $.ajax({
+##            type: "get",
+##            url: "search?userId=${userId}&userName=${userName}&searchMsg="+msg,
+##            dataType: "json",
+##            success: function() {
+##
+##            },
+##            error: function() {
+##
+##            }
+##        });
+//        var goodses = document.getElementsByClassName("goods");
+//        for (var i = 0 ; i < goodses.length ; i ++) {
+//            goodses[i].style.display = "block";
+//            if (goodses[i].innerHTML.indexOf(msg) > -1) {
+//                goodses[i].style.display = "block";
+//            } else {
+//                goodses[i].style.display = "none";
+//            }
+//        }
     }
 
 </script>

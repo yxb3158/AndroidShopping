@@ -57,6 +57,27 @@ public class MainController {
         return new ModelAndView("android/main");
     }
 
+    @RequestMapping(value = "/search")
+    @ResponseBody
+    public ModelAndView search(Model model, @RequestParam("userName") String userName,
+                                            @RequestParam("userId") int userId,
+                                            @RequestParam("searchMsg") String  searchMsg) {
+        List<ShopType> shopTypeList = typeService.getAllShopType();  // 定义一个list,包含查询出来的所有商品类型
+        List<ShopBrand> brandList = brandService.getAllShopBrand();  // 定义一个list,包含查询出来的所有商品品牌
+        List<ShopGoods> goodsList = goodsService.getAllShopGoodsBysearch(searchMsg);  // 定义一个list,包含查询出来的所有商品
+        List<ShopGoodsDto> shopGoodsDtos = getShopGoodsDtos(goodsList, shopTypeList, brandList); //调用私有方法,将查处所有信息封装到一个list
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("typeDomains", shopTypeList);
+        result.put("brandDomains", brandList);
+        result.put("goodsDomains", shopGoodsDtos);
+        result.put("userName", userName);
+        result.put("userId", userId);
+        model.addAllAttributes(result);
+
+        return new ModelAndView("android/main");
+    }
+
     @RequestMapping(value = "/typeList")
     @ResponseBody
     public ModelAndView typeListPage(Model model,
