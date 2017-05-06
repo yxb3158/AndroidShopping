@@ -59,7 +59,11 @@
         <ul>
             <li><a href="javascript:;" class="a">全部商品</a></li>
             #foreach( ${info} in ${typeDomains})
-                <li><a href="/android/typeList?type=${info.getId()}&userName=${userName}&userId=${userId}">${info.getTypeName()}</a></li>
+                #if(${info.getId()} == 8)
+                    <li><a href="/android/diyTypeList?type=${info.getId()}&userName=${userName}&userId=${userId}">${info.getTypeName()}</a></li>
+               #else
+                   <li><a href="/android/typeList?type=${info.getId()}&userName=${userName}&userId=${userId}">${info.getTypeName()}</a></li>
+                #end
             #end
         </ul>
     </div>
@@ -68,6 +72,7 @@
             <figure>
                 <a href="javascript:;"><img src="${info.getPic()}" alt="商品" class="xqtp"/></a>
                 <p>${info.getName()}</p>
+                <p>${info.getDescription()}</p>
                 <div class="info">
                     <em class="sat">￥${info.getPrice()}&nbsp;<small style="text-decoration: line-through; color: grey;">￥${info.getOriginPrice()}</small></em>
                     <input type="hidden" value="${info.getStock()}" class="stockLeft">

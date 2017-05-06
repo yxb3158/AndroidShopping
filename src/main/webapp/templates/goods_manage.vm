@@ -121,7 +121,10 @@
                                       <tr>
                                           <td>${info.getName()}</td>
                                           <td>${info.getDescription()}</td>
-                                          <td>${info.getTypeContent()}</td>
+                                          <td>#if(!${info.getTypeContent()}) 该类别已删除
+                                              #else ${info.getTypeContent()}
+                                              #end
+                                          </td>
                                           <td>${info.getBrandContent()}</td>
                                           <td>${info.getOriginPrice()}</td>
                                           <td>${info.getPrice()}</td>

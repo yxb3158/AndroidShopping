@@ -16,7 +16,7 @@
         function addType() {
             var typeName = document.getElementById("add_type_name").value;
             var description = document.getElementById("add_type_description").value;
-            var sign = document.getElementById("add_type_sign").value;
+            var sign = 1;
             var url = "/addType?typeName=" + typeName + "&description=" + description + "&sign=" + sign;
             $.ajax({
                 type: "get",
@@ -36,7 +36,7 @@
             document.getElementById("edit_type_id").value = id;
             document.getElementById("edit_type_name").value = typeName;
             document.getElementById("edit_type_description").value = description;
-            document.getElementById("edit_type_sign").value = sign;
+//            document.getElementById("edit_type_sign").value = sign;
             layer.open({
                 type: 1,
                 title: false,
@@ -51,7 +51,7 @@
             var id = document.getElementById("edit_type_id").value;
             var typeName = document.getElementById("edit_type_name").value;
             var description = document.getElementById("edit_type_description").value;
-            var sign = document.getElementById("edit_type_sign").value;
+            var sign = 1;
             var url = "/editType?id=" + id + "&typeName=" + typeName + "&description=" + description + "&sign=" + sign;
             $.ajax({
                 type: "get",
@@ -91,7 +91,6 @@
                                       <tr>
                                           <th>类别名称</th>
                                           <th>类别简介</th>
-                                          <th>是否启用</th>
                                           <th>操作</th>
                                       </tr>
                                       </thead>
@@ -100,11 +99,6 @@
                                       <tr>
                                           <td>${info.getTypeName()}</td>
                                           <td>${info.getDescription()}</td>
-                                          #if(${info.getSign()}==1)
-                                          <td style="color: #5cb85c">启用</td>
-                                          #else
-                                          <td style="color: red;">已禁用</td>
-                                          #end
                                           <td>
                                               <button class="btn btn-info btn-xs" onclick="editTypeDialog(${info.getId()}, '${info.getTypeName()}', '${info.getDescription()}', ${info.getSign()})"><i class="icon-edit-sign"></i> 修改</button>
                                               <button class="btn btn-danger btn-xs" onclick="jumpPage('deleteType?id=${info.getId()}', 1, '是否确认删除?')"><i class="icon-trash "></i> 删除</button>
@@ -137,10 +131,6 @@
       <div style="padding: 10px">
           <input class="form-control" placeholder="类别名称" style="margin-top: 15px" id="add_type_name" />
           <input class="form-control" placeholder="类别描述" style="margin-top: 15px" id="add_type_description" />
-          <select id="add_type_sign" class="form-control" style="margin-top: 15px;float: left">
-              <option value="1">启用</option>
-              <option value="0">禁用</option>
-          </select>
           <button class="btn btn-info dbconfig-btn " style="margin-top: 15px; width: 100%" onclick="addType()">提交</button>
       </div>
   </div>
@@ -151,10 +141,10 @@
           <input type="hidden" id="edit_type_id" />
           <input class="form-control" placeholder="类别名称" style="margin-top: 15px;" id="edit_type_name" />
           <input class="form-control" placeholder="类别描述" style="margin-top: 15px" id="edit_type_description" />
-          <select id="edit_type_sign" class="form-control" style="margin-top: 15px;float: left">
-              <option value="1">启用</option>
-              <option value="0">禁用</option>
-          </select>
+##          <select id="edit_type_sign" class="form-control" style="margin-top: 15px;float: left">
+##              <option value="1">启用</option>
+##              <option value="0">禁用</option>
+##          </select>
           <button class="btn btn-info dbconfig-btn " style="margin-top: 15px; width: 100%" onclick="editType()">修改</button>
       </div>
   </div>
