@@ -2,13 +2,14 @@
 <html lang="en">
     #parse("head.vm")
     <script>
-        function showDetils(name, address, phone, totalPrice, ctime, detail) {
+        function showDetils(name, address, phone, totalPrice, ctime, detail, msg) {
             document.getElementById("dialog_name").innerHTML = name;
             document.getElementById("dialog_address").innerHTML = address;
             document.getElementById("dialog_phone").innerHTML = phone;
             document.getElementById("dialog_total_price").innerHTML = totalPrice;
             document.getElementById("dialog_ctime").innerHTML = new Date(parseInt(ctime) ).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
             document.getElementById("dialog_detail").innerHTML = detail;
+            document.getElementById("dialog_msg").innerHTML = msg;
         }
 
         function jumpPage(url) {
@@ -51,7 +52,7 @@
                                   #set($ctime = $!{info.getCtime()} * 1000)
                                   <td><span class="label label-warning label-mini">$!date.format('yyyy-MM-dd HH:mm:ss ',$!ctime)</span></td>
                                   <td>
-                                      <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" onclick="showDetils('${info.getName()}', '${info.getAddress()}', '${info.getPhone()}', '${info.getTotalPrice()}', '${ctime}', '${info.getNote()}')"><i class="icon-file"></i> 查看详情</button>
+                                      <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" onclick="showDetils('${info.getName()}', '${info.getAddress()}', '${info.getPhone()}', '${info.getTotalPrice()}', '${ctime}', '${info.getNote()}',#if(!${info.getMsg()})'暂无'#else '${info.getMsg()}'#end)"><i class="icon-file"></i> 查看详情</button>
                                       <button class="btn btn-success btn-xs" onclick="jumpPage('/acceptOrder?orderId=${info.getId()}')"><i class="icon-ok"></i> 接单</button>
 ##                                      <button class="btn btn-danger btn-xs"><i class="icon-trash "></i> 拒单</button>
                                   </td>
@@ -115,6 +116,10 @@
                               <tr>
                                   <td><a href="#">用户留言:</a></td>
                                   <td class="hidden-phone" id="dialog_detail"></td>
+                              </tr>
+                              <tr>
+                                  <td><a href="#">订单详情:</a></td>
+                                  <td class="hidden-phone" id="dialog_msg"></td>
                               </tr>
                               </tbody>
                           </table>

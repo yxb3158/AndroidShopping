@@ -24,10 +24,12 @@
                           <thead>
                           <tr>
                               <th>收货人</th>
-                              <th class="hidden-phone">收货地址</th>
+                              <th class="hidden-phone" width="100px">收货地址</th>
                               <th class="hidden-phone">联系电话</th>
                               <th class="hidden-phone">总价格</th>
                               <th class="hidden-phone">下单时间</th>
+                              <th class="hidden-phone" width="150px">用户留言</th>
+                              <th class="hidden-phone">订单详情</th>
                               <th class="hidden-phone">状态</th>
                           </tr>
                           </thead>
@@ -40,6 +42,8 @@
                               <td class="hidden-phone">${info.getTotalPrice()}</td>
                               #set($ctime = $!{info.getCtime()} * 1000)
                               <td class="center hidden-phone">$!date.format('yyyy-MM-dd HH:mm:ss ',$!ctime)</td>
+                              <td class="hidden-phoone">${info.getNote()}</td>
+                              <td class="hidden-phone">#if(!${info.getMsg()})暂无#else ${info.getMsg()} #end</td>
                               #if(${info.getStatus()} == 1)
                                   <td class="hidden-phone"><span class="label label-warning">未完成</span></td>
                               #elseif(${info.getStatus()} == 2)
