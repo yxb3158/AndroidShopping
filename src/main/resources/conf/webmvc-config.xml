@@ -20,7 +20,7 @@
             <value>root</value>
         </property>
         <property name="password">
-            <value>123456</value>
+            <value>yxb123</value>
         </property>
     </bean>
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

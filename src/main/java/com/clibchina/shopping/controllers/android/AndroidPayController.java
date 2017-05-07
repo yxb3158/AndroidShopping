@@ -6,7 +6,13 @@ import com.clibchina.shopping.domain.ShopCart;
 import com.clibchina.shopping.domain.ShopGoods;
 import com.clibchina.shopping.domain.ShopOrder;
 import com.clibchina.shopping.domain.ShopOrderGoodsMapping;
-import com.clibchina.shopping.service.*;
+import com.clibchina.shopping.service.BrandService;
+import com.clibchina.shopping.service.CUserService;
+import com.clibchina.shopping.service.CartService;
+import com.clibchina.shopping.service.GoodsService;
+import com.clibchina.shopping.service.OrderGoodsMappingService;
+import com.clibchina.shopping.service.OrderService;
+import com.clibchina.shopping.service.TypeService;
 import com.clibchina.shopping.tools.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,9 +21,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -51,10 +58,13 @@ public class AndroidPayController extends PublicController {
 
         List<ShopCart> shopCartList = cartService.getShopCartListByUserId(userId);
         double totalPrice = 0;
+        StringBuffer msgInfo = new StringBuffer();
         for (ShopCart shopCart : shopCartList) {
             ShopGoods shopGoods = goodsService.getShopGoods(shopCart.getGoodsId());
+            msgInfo.append(","+shopGoods.getName());
 //            goodsService.reduceShopGoodsStock(shopCart.getGoodsId(),shopCart.getNum());
             totalPrice += shopGoods.getPrice() * shopCart.getNum();
+
         }
 
         ShopOrder shopOrder = new ShopOrder();
@@ -68,6 +78,9 @@ public class AndroidPayController extends PublicController {
         shopOrder.setSendTime(0);
         shopOrder.setCtime(TimeUtil.getNow());
         shopOrder.setUtime(TimeUtil.getNow());
+        shopOrder.setMsg(msgInfo.substring(1));
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");//设置日期格式
+        shopOrder.setDt(df.format(new Date()));
         orderService.addShopOrder(shopOrder);
 
         for (ShopCart shopCart : shopCartList) {
