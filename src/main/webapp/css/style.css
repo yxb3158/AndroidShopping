@@ -193,7 +193,7 @@ ul.sidebar-menu {
 }
 
 ul.sidebar-menu li ul.sub li{
-    background: #35404D;
+    /*background: #35404D;*/
     margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
@@ -257,7 +257,7 @@ ul.sidebar-menu li a{
 }
 
 ul.sidebar-menu li.active a, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
-    background: #35404d;
+    /*background: #35404d;*/
     color: #fff;
     display: block;
     border-radius: 4px;

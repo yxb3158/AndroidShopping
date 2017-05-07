@@ -54,7 +54,7 @@
         #foreach( ${info} in ${cartDomains})
         <ul>
             <li class="li1" style="width: 30px;height: 1px"></li>
-            <li class="li2"><a href="spxq.html"><img src="img/u67.png" alt="" style="width: 60px;height: 60px"/></a></li>
+            <li class="li2"><a href="spxq.html"><img src="${info.getGoodsPic()}" alt="" style="width: 60px;height: 60px"/></a></li>
             <li class="li3"><span>${info.getGoodsName()}</span><br><span style="color: red" >гд</span><input type="text" value="${info.getGoodsPrice()}" class="one" disabled="disabled"></li>
             <li class="li4"><div>
                 <a style="padding: 0 0.5rem 0 0.5rem; border: 1px solid gainsboro;" onclick="reducdCart(${info.getGoodsId()})">-</a>

@@ -53,6 +53,7 @@ public class AndroidPayController extends PublicController {
         double totalPrice = 0;
         for (ShopCart shopCart : shopCartList) {
             ShopGoods shopGoods = goodsService.getShopGoods(shopCart.getGoodsId());
+//            goodsService.reduceShopGoodsStock(shopCart.getGoodsId(),shopCart.getNum());
             totalPrice += shopGoods.getPrice() * shopCart.getNum();
         }
 

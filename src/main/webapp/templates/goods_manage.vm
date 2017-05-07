@@ -125,7 +125,9 @@
                                               #else ${info.getTypeContent()}
                                               #end
                                           </td>
-                                          <td>${info.getBrandContent()}</td>
+                                          <td>#if(!${info.getBrandContent()}) ¸ÃÆ·ÅÆÒÑÉ¾³ý
+                                          #else ${info.getBrandContent()}
+                                          #end</td>
                                           <td>${info.getOriginPrice()}</td>
                                           <td>${info.getPrice()}</td>
                                           <td>${info.getStock()}</td>

@@ -140,8 +140,8 @@
     <div class="allsp">
         #foreach( ${info} in ${goodsDomains})
             #if(${info.getSign()} == 1)
-                <figure class="goods">
-                    <a href="javascript:;"><img src="${info.getPic()}" alt="商品" class="xqtp"/></a>
+                <figure class="goods" >
+                    <a href="javascript:;"><img src="${info.getPic()}" alt="商品" class="xqtp" style="width:176.391px;height:159.328px"/></a>
                     <p>${info.getName()}</p>
                     <p>${info.getDescription()}</p>
                     <input type="hidden" value="${info.getStock()}" class="stockLeft">

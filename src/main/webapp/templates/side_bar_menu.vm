@@ -2,7 +2,7 @@
     <div id="sidebar"  class="nav-collapse">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
-            <li class="active">
+            <li class="sub-menu">
                 <a class="" href="/main">
                     <i class="icon-dashboard"></i>
                     <span>с╙р╣╢Сел</span>
