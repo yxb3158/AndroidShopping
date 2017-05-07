@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height, user-scalable=no,initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>商铺首页</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/Up.css">
+
+    <style>
+        .head_bar {
+            display: inline-block;
+            width: 25%;
+            height: 60px;
+            float: left;
+        }
+        .clear_float {
+            clear: both;
+            height: 0;
+            line-height: 0;
+            font-size: 0
+        }
+        .img-wrap{
+            height:178px;
+            margin:0 auto;
+            overflow:hidden;
+            position:relative;
+            border:1px dotted #ccc;
+        }
+        #img-container{
+            position:absolute;
+            height:178px;
+        }
+        #img-container li {
+            width:414px;
+            height:178px;
+            margin-right: 20px;
+            background-color: black;
+            color:white;
+            line-height: 178px;
+            text-align: center;
+            font-size: 48px;
+            float:left;
+        }
+        #arrow{
+            position:absolute;
+            left:50%;
+            margin-left: -105px;
+            bottom:20px;
+            width:100px;
+            height:20px;
+        }
+        #arrow span{
+            width:40px;
+            height:20px;
+            background-color: #ddd;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            float:left;
+        }
+        #arrow .r-span{
+            margin-right: 0;
+        }
+    </style>
+</head>
+<body style="background: white;margin: 0;padding: 0;">
+<div style="background: lightseagreen;width: 100%;height: 55px">
+    <div style="padding: 0">
+        <div style="display:inline-block;width: 50px;height: 50px;margin: 0;padding: 0;float: left"><img src="img/logo_with_out_border.png" style="width: 40px;margin-top: 5px;margin-left: 10px" alt="头像"/></div>
+        <div style="position:relative; padding: 0;float: left">
+            <input placeholder="&nbsp;&nbsp;&nbsp;类别、商家、商品关键字" style="padding: 0 5px;width:200px;height: 30px;border: 0px;margin-top: 12px;margin-left: 30px;border-radius: 20px;outline: none" id="searchBar">
+            <div style="color: white;font-size: 16px;display: inline-block; width: 50px; height: 30px; line-height: 30px; border: 1px solid white; border-radius: 12px; text-align: center;position: absolute; margin-left: 5px; right:-55px; top: 12px;" onclick="search()">搜索</div>
+        </div>
+    </div>
+</div>
+<div class="container" style="background: white">
+    <div class="allLogo" style="background: white">
+        <div class="logo" style="clear: left">
+            #foreach( ${info} in ${typeDomains})
+                <div class="head_bar" style="border: 1px solid #4baab2;background: -webkit-linear-gradient(top, lightseagreen, #317eb2); color: white; line-height: 60px; text-align: center; font-size: 14px" )
+                     #if(${info.getId()} == 8) onclick="jumpPage('diyTypeList?type=${info.getId()}&userName=${userName}&userId=${userId}')"
+                     #else
+                     onclick="jumpPage('typeList?type=${info.getId()}&userName=${userName}&userId=${userId}')"
+                     #end
+                     >${info.getTypeName()}</div>
+            #end
+            <div class="clear_float"></div>
+        </div>
+    </div>
+    <div class="SeckillTwo">
+        <div class="img-wrap">
+            <ul id="img-container">
+                <li class="item">
+                    <img src="img/u16.png" alt="">
+                </li>
+                <li class="item">
+                    <img src="img/11.jpg" alt="">
+                </li>
+                <li class="item">
+                    <img src="img/22.jpg" alt="">
+                </li>
+                <li class="item">
+                    <img src="img/33.jpg" alt="">
+                </li>
+                <li class="item">
+                    <img src="img/44.jpg" alt="">
+                </li>
+                <li class="item">
+                    <img src="img/55.jpg" alt="">
+                </li>
+                <li class="item">
+                    <img src="img/66.jpg" alt="">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="store">
+        <ul>
+            <li class="li1"><a href="#">商品</a></li>
+            <li class="li2"><a href="javascript:;" class="xlmenu">全部&nbsp;<img src="img/donw.png" style="width: 12px;display: inline"></a>&nbsp;共<span style="color: #e4393c;font-size: 1.8rem">${goodsDomains.size()}</span>件</li>
+        </ul>
+        <div class="ycmenu">
+            <ul>
+                <li><a href="allGoods.html" class="a">全部商品</a></li>
+                #foreach( ${info} in ${typeDomains})
+                    #if(${info.getId()} == 8)
+                        <li><a href="/android/diyTypeList?type=${info.getId()}&userName=${userName}&userId=${userId}">${info.getTypeName()}</a></li>
+                    #else
+                        <li><a href="/android/typeList?type=${info.getId()}&userName=${userName}&userId=${userId}">${info.getTypeName()}</a></li>
+                    #end
+                #end
+            </ul>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="border">
+
+    </div>
+    <div class="allsp">
+        #foreach( ${info} in ${goodsDomains})
+            #if(${info.getSign()} == 1)
+                <figure class="goods" >
+                    <a href="javascript:;"><img src="${info.getPic()}" alt="商品" class="xqtp" style="width:176.391px;height:159.328px"/></a>
+                    <p>${info.getName()}</p>
+                    <p>${info.getDescription()}</p>
+                    <input type="hidden" value="${info.getStock()}" class="stockLeft">
+                    <div class="info">
+                        <em class="sat">￥${info.getPrice()}&nbsp;<small>￥${info.getOriginPrice()}</small></em>
+                        <a href="#" onclick="addCart(${info.getId()}, this)"><img src="img/u20.png" alt="购物车" style="width: 30px;height: 30px" align="right"/></a>
+                    </div>
+                </figure>
+            #end
+        #end
+        <div class="clear"></div>
+    </div>
+    <div class="wx_nav" id="wx_nav">
+        <a href="javascript:;" class="nav_index" id="nav_index">首页</a>
+        <a href="shopping?userId=${userId}&userName=${userName}" class="nav_shopcart" id="nav_shopcart">购物车</a>
+        <a href="myList?userId=${userId}&userName=${userName}&type=-1" class="nav_me on" id="nav_me on">订单</a>
+        <a href="javascript:;" class="nav_index1" id="exit">退出</a>
+    </div>
+</div>
+<footer>
+    <div class="footer">
+        <p>没有更多了</p>
+    </div>
+</footer>
+</div>
+<div class="alert">
+    <table border="1" cellSpacing=0  style="width: 100%;text-align: center;border-spacing:0;BORDER-COLLAPSE: collapse">
+        <tr>
+            <td colspan="2">
+                <div style="padding: 0.5rem 0 0.5rem 0;font-size: 1.6rem">确定退出应用程序?</div>
+            </td>
+        </tr>
+        <tr>
+            <td><button type="button" class="confirm" style="border: none;outline: none;background-color: white;font-size: 1.6rem;padding: 0.5rem 0 0.5rem 0;width:100%" onclick="jumpPage('/android/loginPage')">确定</button></td>
+            <td><button type="button" class="none" style="border: none;outline: none;background-color: white;font-size: 1.6rem;padding: 0.5rem 0 0.5rem 0;width:100%">取消</button></td>
+        </tr>
+    </table>
+</div>
+<div class="theme-popover-mask"></div>
+<div class="actGotop"><a href="javascript:;" title="返回顶部"></a> <img src="img/fanhui.png" alt=""></div>
+<div class="theme-popover-mask"></div>
+<script type="text/javascript" src="js/jquery-1.12.1.js"></script>
+<script type="text/javascript" src="js/touch.js"></script>
+<script type="text/javascript" src="js/srcolltop.js"></script>
+<script type="text/javascript" src="js/timer.js"></script>
+<script type="text/javascript" src="js/xlmenu.js"></script>
+<script>
+    $(function () {
+
+        $("figure:eq(0)").css({
+            border:'none'
+        });
+        $("figure:eq(1)").css({
+            border:'none'
+        });
+        $("#exit").on('click', function() {
+            exit();
+        });
+        $(".none").on("click",function() {
+            $(".alert").slideUp();
+            $(".theme-popover-mask").hide();
+        });
+        var titleName=$(".ycmenu a");
+        for(var i =0;i<titleName.length;i++){
+            titleName[i].id=i;
+            titleName[i].onmouseover=function(){
+                for(var j =0;j<titleName.length;j++){
+                    titleName[j].className="";
+                }
+                this.className = "a";
+            }}
+
+    });
+    var oimgs=document.getElementById("img-container");
+    var ali=oimgs.getElementsByTagName("li");
+    var a=-2;
+    oimgs.innerHTML+=oimgs.innerHTML;
+    oimgs.style.width=(ali[0].offsetWidth+20)*ali.length+"px";
+    setInterval(function(){
+        oimgs.style.left=(oimgs.offsetLeft+a)+"px";
+        if(oimgs.offsetLeft<=-(oimgs.offsetWidth/2))
+            oimgs.style.left=0;
+        if(oimgs.offsetLeft>0)
+            oimgs.style.left=(-oimgs.offsetWidth/2)+"px";
+    },30);
+    function jumpPage(url) {
+        location.href = url;
+    }
+    //删除弹窗
+
+    function exit () {
+        $(".alert").slideDown();
+        $(".theme-popover-mask").show();
+        $(".theme-popover-mask").click(function () {
+            $(".alert").slideUp();
+            $(".theme-popover-mask").hide();
+            $(".confirm").on("tap", function() {
+                $(".spxz").hide();
+                $(".alert").slideUp();
+                $(".theme-popover-mask").hide();
+                $(".li5").hide();
+                $(".li6").hide();
+                localStorage.removeItem("userName");
+                localStorage.removeItem("password");
+                location.href="/android/loginPage";
+            });
+        });
+    }
+
+    function addCart(goodsId, that) {
+        var stock = $(that).parents('.goods').find('.stockLeft').val();
+        if(stock == 0) {
+            alert("该商品管理员已设库存为0,不能购买");
+            return;
+        }
+        $.ajax({
+            type: "get",
+            url: "addCart?userId=${userId}&goodsId=" + goodsId + "&userName=${userName}",
+            dataType: "json",
+            success: function(data) {
+                alert("添加成功");
+            },
+            error: function(data) {
+                alert("error");
+            }
+        });
+    }
+    function search() {
+        var msg = document.getElementById("searchBar").value;
+        if(msg) {
+            location.href = "search?userId=${userId}&userName=${userName}&searchMsg="+msg;
+        } else {
+            location.href = "main?userName=${userName}";
+        }
+##        alert(11);
+##        $.ajax({
+##            type: "get",
+##            url: "search?userId=${userId}&userName=${userName}&searchMsg="+msg,
+##            dataType: "json",
+##            success: function() {
+##
+##            },
+##            error: function() {
+##
+##            }
+##        });
+//        var goodses = document.getElementsByClassName("goods");
+//        for (var i = 0 ; i < goodses.length ; i ++) {
+//            goodses[i].style.display = "block";
+//            if (goodses[i].innerHTML.indexOf(msg) > -1) {
+//                goodses[i].style.display = "block";
+//            } else {
+//                goodses[i].style.display = "none";
+//            }
+//        }
+    }
+
+</script>
+</body>
+</html>

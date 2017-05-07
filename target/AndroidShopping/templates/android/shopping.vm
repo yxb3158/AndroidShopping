@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height, user-scalable=no,initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>购物车</title>
+    <link rel="stylesheet" href="css/shopping.css"/>
+    <script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="js/qxsp.js"></script>
+    <!-- 复选框 -->
+    <script type="text/javascript">
+        function addCart(goodsId) {
+            $.ajax({
+                type: "get",
+                url: "addCart?userId=${userId}&goodsId=" + goodsId + "&userName=${userName}",
+                dataType: "json",
+                success: function(data) {
+                    location.href = "/android/shopping?userId=${userId}&userName=${userName}";
+                },
+                error: function(data) {
+                    alert("error");
+                }
+            });
+        }
+
+        function reducdCart(goodsId) {
+            $.ajax({
+                type: "get",
+                url: "reduceCart?userId=${userId}&goodsId=" + goodsId + "&userName=${userName}",
+                dataType: "json",
+                success: function(data) {
+                    location.href = "/android/shopping?userId=${userId}&userName=${userName}";
+                },
+                error: function(data) {
+                    alert("error");
+                }
+            });
+        }
+
+        function jumpPage(url) {
+            location.href = url
+        }
+
+    </script>
+</head>
+<body>
+<div class="body">
+    <div class="tour">
+        <a href="/android/main?userName=${userName}" class="tour1"><img src="img/back.png" alt="" style="height: 26px;width: 20px"></a>
+        <p>购物车</p>
+        <a href="#" class="tour2"><i class="btn"></i></a>
+    </div>
+        <div class="spxz">
+        #foreach( ${info} in ${cartDomains})
+        <ul>
+            <li class="li1" style="width: 30px;height: 1px"></li>
+            <li class="li2"><a href="spxq.html"><img src="${info.getGoodsPic()}" alt="" style="width: 60px;height: 60px"/></a></li>
+            <li class="li3"><span>${info.getGoodsName()}</span><br><span style="color: red" >￥</span><input type="text" value="${info.getGoodsPrice()}" class="one" disabled="disabled"></li>
+            <li class="li4"><div>
+                <a style="padding: 0 0.5rem 0 0.5rem; border: 1px solid gainsboro;" onclick="reducdCart(${info.getGoodsId()})">-</a>
+                <input type="text" value="${info.getNum()}" class="num"/>
+                <a style="padding: 0 0.5rem 0 0.5rem; border: 1px solid gainsboro;" onclick="addCart(${info.getGoodsId()})">+</a></div>
+            </li>
+        </ul>
+        #end
+        </div>
+</div>
+<div style="clear: both"></div>
+<div class="footing">
+    <ul>
+##        <li class="li5"><input type="checkbox" id="checkbox" value="1" onclick="check()" />全选</li>
+        <li class="li6">合计：<span class="red">￥${totalPrice}</span></li>
+        <li class="li7"><a href="payPage?userId=${userId}&userName=${userName}"><button type="button">结算</button></a></li>
+    </ul>
+</div>
+    <div class="alert">
+       <table border="1" cellSpacing=0  style="width: 100%;text-align: center;border-spacing:0;BORDER-COLLAPSE: collapse">
+           <tr>
+               <td colspan="2">
+                   <div style="padding: 0.5rem 0 0.5rem 0;font-size: 1.6rem">提示</div>
+                   <div style="padding: 0.5rem 0 0.5rem 0;font-size: 1.6rem">确定删除当前商品?</div>
+               </td>
+           </tr>
+           <tr>
+               <td><button type="button" class="delete" style="border: none;outline: none;background-color: white;font-size: 1.6rem;padding: 0.5rem 0 0.5rem 0;width:100%" onclick="jumpPage('/android/clearCart?userName=${userName}&userId=${userId}')">确定</button></td>
+               <td><button type="button" class="none" style="border: none;outline: none;background-color: white;font-size: 1.6rem;padding: 0.5rem 0 0.5rem 0;width:100%">取消</button></td>
+           </tr>
+       </table>
+    </div>
+<div class="theme-popover-mask"></div>
+</body>
+</html>

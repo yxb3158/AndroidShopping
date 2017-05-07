@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height, user-scalable=no,initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>注册</title>
+    <link rel="stylesheet" href="css/zhuce.css"/>
+    <script type="text/javascript" src="js/alert.js"></script>
+ <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+</head>
+<script>
+    function register() {
+        var userName = document.getElementById("user_name").value;
+        var password = document.getElementById("password").value;
+        var rePassword = document.getElementById("rePassword").value;
+        var email = document.getElementById("email").value;
+        if (!userName || !password) {
+            alert("用户名和密码不能为空");
+            return;
+        } else if (password.length != 8){
+            alert("密码必须为8位");
+            return;
+        } else if ( !/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/.test(email)){
+            alert("邮箱格式不正确");
+            return;
+        } else if (password != rePassword) {
+            alert("两次密码不一致");
+            return;
+        }
+        var url = "/android/register?userName=" + userName + "&password=" + password + "&rePassword=" + rePassword + "&email=" + email;
+        $.ajax({
+            type: "post",
+            url: url,
+            dataType: "json",
+            success: function(data) {
+                var result = eval(data);
+                if (result.status == 'ok') {
+                    location.href = "/android/loginPage";
+                } else {
+                    alert(result.msg);
+                }
+            },
+            error: function(data) {
+                alert("出错了,请重试");
+            }
+        });
+    }
+</script>
+<body style="background: white">
+<div class="body">
+    <div class="dlbg">
+        <div class="dl">
+            <p>注册雯雯商城账号</p>
+            <div class="srk">
+                <input type="text" class="input1" placeholder=" 用户名" maxlength="32" id="user_name"/><br/>
+                <input type="text" class="input1" placeholder=" 邮箱" maxlength="32" id="email"/><br/>
+                <input type="password" placeholder=" 密码" class="input1" maxlength="16" id="password"/><br/>
+                <input type="password" placeholder=" 重复密码" class="input1" maxlength="16" id="rePassword"/><br/>
+                <a href="javascript:"><button type="button" id="btn" onclick="register()">确定</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
